@@ -17,6 +17,8 @@ let runright = new Image()
 runright.src = ('./Images/NOTMine/spriteRunRight.png')
 let runleft = new Image()
 runleft.src = ('./Images/NOTMine/spriteRunLeft.png')
+let flag = new Image()
+flag.src = ('./Images/Dinos/Flag.png')
 //************************************ */
 
 class Player {
@@ -34,6 +36,7 @@ class Player {
         this.width = 66
         this.height = 150
         this.image = standright
+        
         this.frames = 0 //represents what frame in animation we are on.
         this.sprites = {
             stand: {
@@ -51,8 +54,8 @@ class Player {
         }
         this.currentSprite = this.sprites.stand.right
         this.currentCropWidth = 177
-
     }
+
     draw() {
         c.drawImage(this.currentSprite, 
                     this.currentCropWidth * this.frames,
@@ -169,17 +172,31 @@ function init(){
 
     hillsImage = new Image()
     hillsImage.src = ('./Images/NOTMine/hills.png')
+
+    flag = new Image()
+    flag.src = ('./Images/Dinos/Flag.png')  
     
     platforms = [new Platform({x:-1, y:470, image}),
         new Platform({x:image.width*4 +300-2 + image.width - platsmalltall.width, y:270, image: platsmalltall}),
+        new Platform({x:image.width*10 +300-2 + image.width - platsmalltall.width, y:270, image: platsmalltall}),
+        new Platform({x:image.width*10 +700-2 + image.width - platsmalltall.width, y:270, image: platsmalltall}),
+        new Platform({x:image.width*10 +700-2 + image.width - platsmalltall.width, y:130, image: platsmalltall}),
         new Platform({x:image.width - 3, y:470, image}),
         new Platform({x:image.width*2 +150, y:470, image}),
         new Platform({x:image.width*3 +300, y:470, image}),
-        new Platform({x:image.width*4 +300-2, y:470, image}),
-        new Platform({x:image.width*5 +700-2, y:470, image})
+        new Platform({x:image.width*4 +300-3, y:470, image}),
+        new Platform({x:image.width*5 +700-3, y:470, image}),
+        new Platform({x:image.width*6 +400-3, y:470, image}),
+        new Platform({x:image.width*7 +800-3, y:470, image}),
+        new Platform({x:image.width*8 +700-3, y:470, image}),
+        new Platform({x:image.width*9 +700-3, y:470, image}),
+        new Platform({x:image.width*10 +700-3, y:470, image}),
+        new Platform({x:image.width*12 +600-3, y:470, image}),
+        new Platform({x:image.width*13 +600-4, y:470, image}),
+        new Platform({x:image.width*14 +600-4, y:470, image}),
+        new Platform({x:8500, y:53, image: flag})
     ]
-
-    // lilbigplat = [new Platform2({x:platsmalltall.width*4 +300-2, y:370, image: platsmalltall})]
+    // flag_img = new Platform({x:image.width*10 +700-2 + image.width - platsmalltall.width, y:130, image: flag})
 
     player = new Player() 
 
@@ -267,13 +284,11 @@ function animate(){ //our animation loop
         player.currentCropWidth = player.sprites.stand.cropWidth
         player.width = player.sprites.stand.width
     }
-   
-    
-
     
     //win condition
-    if (scrolloffset > image.width*5 +700-2){
+    if (scrolloffset > 8200){
         console.log("you win")
+        init()
     }
 
     //lose condition
@@ -304,13 +319,11 @@ addEventListener('keydown', ({key}) => {
             console.log('right')
             keys.right.pressed = true
             lastKey = 'right'
-            // player.currentSprite = player.sprites.run.right
-            // player.currentCropWidth = player.sprites.run.cropWidth
-            // player.width = player.sprites.run.width
+            
             break
         case 'w':
             console.log('up')
-            player.velocity.y -= 25 //moving player up (-ve is up)
+            player.velocity.y -= 25 //moving player up (-ve is up)'
             break
     }
 })
